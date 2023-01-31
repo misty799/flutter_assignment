@@ -34,4 +34,15 @@ class HeadlineData {
     publishedAt = map['publishedAt'];
     content = map['content'];
   }
+  toJson() {
+    return {
+      'source': {"id": source!["id"], "name": source!["name"]},
+      'author': author,
+      'title': title,
+      'url': url,
+      'urlToImage': urlToImage,
+      'publishedAt': publishedAt,
+      'content': content
+    };
+  }
 }

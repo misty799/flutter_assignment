@@ -42,23 +42,21 @@ class ApiRequest {
     this.httpType = httpType;
     this.showLoader = showLoader;
 
-    if (mContext != null) {
-      AppHelper.checkInternetConnectivity().then((bool isConnected) async {
-        if (isConnected) {
-          try {
-            if (showLoader) {
-              ProgressDialog.show(mContext);
-            }
-
-            getAPIRequest(url, body: body);
-          } catch (onError) {
-            print(onError.toString());
+    AppHelper.checkInternetConnectivity().then((bool isConnected) async {
+      if (isConnected) {
+        try {
+          if (showLoader) {
+            ProgressDialog.show(mContext);
           }
-        } else {
-          AppHelper.showToastMessage("No Internet Connection.");
+
+          getAPIRequest(url, body: body);
+        } catch (onError) {
+          print(onError.toString());
         }
-      });
-    }
+      } else {
+        AppHelper.showToastMessage("No Internet Connection.");
+      }
+    });
   }
 
   getAPIRequest(String url, {body}) async {
